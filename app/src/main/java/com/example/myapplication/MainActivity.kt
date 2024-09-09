@@ -29,6 +29,8 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -48,39 +50,26 @@ class MainActivity : ComponentActivity() {
                 .verticalScroll(rememberScrollState())
                 .padding(top = 55.dp)
             ){
-                ListItem(name = "Cat1", prof = "Funny")
-                ListItem(name = "Cat2", prof = "Smart")
-                ListItem(name = "Cat3", prof = "Me")
-                ListItem(name = "Cat4", prof = "You")
-                ListItem(name = "Cat5", prof = "You")
-                ListItem(name = "Cat6", prof = "You")
-                ListItem(name = "Cat6", prof = "You")
-                ListItem(name = "Cat6", prof = "You")
-                ListItem(name = "Cat6", prof = "You")
-                ListItem(name = "Cat6", prof = "You")
-                ListItem(name = "Cat6", prof = "You")
-                ListItem(name = "Cat6", prof = "You")
-                ListItem(name = "Cat6", prof = "You")
-                ListItem(name = "Cat6", prof = "You")
-                ListItem(name = "Cat6", prof = "You")
-            }
+                ListItem(name = "Steve", prof = "Funny")
+                ListItem(name = "Nicola", prof = "Funny")
+                ListItem(name = "Murka", prof = "Funny")
+                ListItem(name = "Funny", prof = "Funny")
+                ListItem(name = "And one more Murka", prof = "Funny")
+                            }
         }
     }
 }
 
 @Composable
 private fun ListItem(name: String, prof: String){
+    val counter = remember{mutableIntStateOf(0)}
     Card(
         modifier = Modifier
             .padding(10.dp)
             .fillMaxWidth()
             .clickable {
-                Log.d("MyLog", "Click")
-            }
-            .pointerInput(Unit){
-               detectDragGesturesAfterLongPress { change, dragAmount ->
-                   Log.d("MyLog", "LongPress: $dragAmount")
-               }
+                counter.intValue++
+                Log.d("MyLog", "Count of touches $counter")
             }
         ,
         shape = RoundedCornerShape(15.dp),
@@ -99,7 +88,7 @@ private fun ListItem(name: String, prof: String){
                 )
                 Column(modifier = Modifier.padding(start = 5.dp)){
                     Text(text = name)
-                    Text(text = prof)
+                    Text(text = "Number of Meow: ${counter.intValue.toString()}")
                 }
             }
         }
