@@ -20,6 +20,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -39,6 +40,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.VerticalAlignmentLine
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 
 class MainActivity : ComponentActivity() {
@@ -46,51 +48,16 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent{
-            Column (modifier = Modifier
-                .verticalScroll(rememberScrollState())
-                .padding(top = 55.dp)
-            ){
-                ListItem(name = "Steve", prof = "Funny")
-                ListItem(name = "Nicola", prof = "Funny")
-                ListItem(name = "Murka", prof = "Funny")
-                ListItem(name = "Funny", prof = "Funny")
-                ListItem(name = "And one more Murka", prof = "Funny")
-                            }
+            LazyColumn(horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(top = 55.dp)) {
+                items(count = 100+1){
+                Text(modifier = Modifier
+                    .padding(vertical = 10.dp),
+                    fontSize = 30.sp,
+                    text = "row $it")}
+            }
         }
     }
 }
-
-@Composable
-private fun ListItem(name: String, prof: String){
-    val counter = remember{mutableIntStateOf(0)}
-    Card(
-        modifier = Modifier
-            .padding(10.dp)
-            .fillMaxWidth()
-            .clickable {
-                counter.intValue++
-                Log.d("MyLog", "Count of touches $counter")
-            }
-        ,
-        shape = RoundedCornerShape(15.dp),
-        elevation = CardDefaults.cardElevation(defaultElevation = 5.dp)
-    ) {
-        Box(){
-            Row (verticalAlignment = Alignment.CenterVertically){
-                Image(
-                    painter = painterResource(id = R.drawable.cat_icon),
-                    contentDescription = "Meow",
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .size(64.dp)
-                        .padding(5.dp)
-                        .clip(CircleShape)
-                )
-                Column(modifier = Modifier.padding(start = 5.dp)){
-                    Text(text = name)
-                    Text(text = "Number of Meow: ${counter.intValue.toString()}")
-                }
-            }
-        }
-        }
-    }
