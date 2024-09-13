@@ -21,6 +21,8 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -48,15 +50,16 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent{
-            LazyColumn(horizontalAlignment = Alignment.CenterHorizontally,
+            LazyRow(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(top = 55.dp)) {
-                items(count = 100+1){
+                itemsIndexed(listOf("item 1", "item 2", "Whatever")){
+                    _, item ->
                 Text(modifier = Modifier
-                    .padding(vertical = 10.dp),
+                    .padding(horizontal = 10.dp),
                     fontSize = 30.sp,
-                    text = "row $it")}
+                    text = "row $item")}
             }
         }
     }
