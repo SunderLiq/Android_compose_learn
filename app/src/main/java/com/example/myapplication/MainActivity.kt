@@ -37,12 +37,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.VerticalAlignmentLine
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.myapplication.ui.theme.Violet200
 
 
 class MainActivity : ComponentActivity() {
@@ -52,14 +54,28 @@ class MainActivity : ComponentActivity() {
         setContent{
             LazyRow(
                 modifier = Modifier
-                    .fillMaxSize()
-                    .padding(top = 55.dp)) {
-                itemsIndexed(listOf("item 1", "item 2", "Whatever")){
+                    .fillMaxWidth()
+                    .background(Violet200)
+                    .padding(top = 55.dp))
+                     {
+                itemsIndexed(
+                    listOf(
+                    ItemRowCats(R.drawable.cat_icon, "Boris"),
+                    ItemRowCats(R.drawable.cat_icon, "Murka"),
+                    ItemRowCats(R.drawable.cat_icon, "Keks"),
+                    ItemRowCats(R.drawable.cat_icon, "Sergey"),
+                    ItemRowCats(R.drawable.cat_icon, "Munya"),
+                    ItemRowCats(R.drawable.cat_icon, "Tasya"),
+                    ItemRowCats(R.drawable.cat_icon, "Homeless"),
+                    ItemRowCats(R.drawable.cat_icon, "Happy"),
+                    ItemRowCats(R.drawable.cat_icon, "Vlad"),
+                    ItemRowCats(R.drawable.cat_icon, "Last one")
+                    )
+                    ){
                     _, item ->
-                Text(modifier = Modifier
-                    .padding(horizontal = 10.dp),
-                    fontSize = 30.sp,
-                    text = "row $item")}
+                    composableItemRow(item = item)
+                }
+
             }
         }
     }
