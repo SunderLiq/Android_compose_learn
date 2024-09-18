@@ -52,28 +52,41 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent{
-            LazyRow(
+            Box(
                 modifier = Modifier
+                    .fillMaxSize()
+                    .background(Color.Gray)
+            ) {
+            }
+            LazyColumn(
+                modifier = Modifier
+                    .background(Color.Gray)
                     .fillMaxWidth()
-                    .background(Violet200)
-                    .padding(top = 55.dp))
+                    .padding(top = 55.dp),
+            )
                      {
                 itemsIndexed(
-                    listOf(
-                    ItemRowCats(R.drawable.cat_icon, "Boris"),
-                    ItemRowCats(R.drawable.cat_icon, "Murka"),
-                    ItemRowCats(R.drawable.cat_icon, "Keks"),
-                    ItemRowCats(R.drawable.cat_icon, "Sergey"),
-                    ItemRowCats(R.drawable.cat_icon, "Munya"),
-                    ItemRowCats(R.drawable.cat_icon, "Tasya"),
-                    ItemRowCats(R.drawable.cat_icon, "Homeless"),
-                    ItemRowCats(R.drawable.cat_icon, "Happy"),
-                    ItemRowCats(R.drawable.cat_icon, "Vlad"),
-                    ItemRowCats(R.drawable.cat_icon, "Last one")
+                        listOf(
+                            ItemColumnCats(R.drawable.cat_icon, "Boris", "Hello, how are you?"),
+                            ItemColumnCats(R.drawable.cat_icon, "Murka", "Stop giving me Whiskas"),
+                            ItemColumnCats(R.drawable.cat_icon, "Sergey", "Murka is my best friend"),
+                            ItemColumnCats(R.drawable.cat_icon, "Keks", "Who da fuck name cat Sergey???!"),
+                            ItemColumnCats(R.drawable.cat_icon, "Munya", "Are you alone?"),
+                            ItemColumnCats(R.drawable.cat_icon, "Tasya", "Guys, you too receiving messages from Homeless? I think his account is cracked." +
+                                    "And he need some help. Are you have his phone number?\n" +
+                                    "And one more. My brother Murka in hospital, and i need to visit him now." +
+                                    "Print me whatever you hand, and i will answer lather"),
+                            ItemColumnCats(R.drawable.cat_icon, "Homeless 1","Hey guys, we need to make home party"),
+                            ItemColumnCats(R.drawable.cat_icon, "Homeless 2","Hey guys, we need to make home party"),
+                            ItemColumnCats(R.drawable.cat_icon, "Homeless 3 ","Hey guys, we need to make home party"),
+                            ItemColumnCats(R.drawable.cat_icon, "Homeless 4 ","Hey guys, we need to make home party"),
+                            ItemColumnCats(R.drawable.cat_icon, "Homeless 5 ","Hey guys, we need to make home party"),
+                            ItemColumnCats(R.drawable.cat_icon, "Homeless 6 ","Hey guys, we need to make home party"),
+                            ItemColumnCats(R.drawable.cat_icon, "ReallyNotHomeless","Hey guys, we need to make street party")
                     )
                     ){
                     _, item ->
-                    composableItemRow(item = item)
+                    ComposableItemColumn(item = item)
                 }
 
             }
